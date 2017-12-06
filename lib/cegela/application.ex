@@ -10,6 +10,7 @@ defmodule Cegela.Application do
     children = [
       # Starts a worker by calling: Cegela.Worker.start_link(arg)
       # {Cegela.Worker, arg},
+      Cegela.Server,
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
