@@ -3,7 +3,12 @@ defmodule Cegela.Server do
   Main server/plug module
   """
 
-  @behaviour Plug
+  use Plug.Router
+
+  plug Plug.RequestId
+  plug Plug.Logger
+  plug :match
+  plug :dispatch
 
   @doc "child spec to let us be supervised"
   def child_spec(opts) do
@@ -17,11 +22,11 @@ defmodule Cegela.Server do
       options: Keyword.merge(opts, [port: port]))
   end
 
-  def init(opts), do: opts
+  get "/favicon.ico" do
+    send_resp(conn, 404, "not here")
+  end
 
-  def call(conn, _opts) do
-    import Plug.Conn
-
+  match _ do
     uri =
       %URI{}
       |> Map.put(:scheme, "https")
