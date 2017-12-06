@@ -7,8 +7,14 @@ defmodule Cegela.Server do
 
   @doc "child spec to let us be supervised"
   def child_spec(opts) do
+    port =
+      case System.get_env("PORT") do
+        nil -> 4000
+        num -> Integer.parse(num) |> elem(0)
+      end
+
     Plug.Adapters.Cowboy.child_spec(scheme: :http, plug: __MODULE__,
-      options: Keyword.merge(opts, [port: 4001]))
+      options: Keyword.merge(opts, [port: port]))
   end
 
   def init(opts), do: opts
