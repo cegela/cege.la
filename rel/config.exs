@@ -36,7 +36,7 @@ end
 environment :prod do
   set include_erts: true
   set include_src: false
-  set cookie: :"&cuDH:|fv}Gq,pHb_.jSg&?Z`0U&/f<)02XF*VXIi9SE%RG}`.ZHcDDxf3Uw7~gI"
+  set cookie: System.get_env("VM_COOKIE")
 end
 
 # You may define one or more releases in this file.
