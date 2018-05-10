@@ -30,7 +30,7 @@ defmodule Cegela.Server do
     uri =
       %URI{}
       |> Map.put(:scheme, "https")
-      |> Map.put(:host, "goo.gl")
+      |> Map.put(:host, "bit.ly")
       |> Map.put(:path, conn.request_path)
       |> Map.put(:query, conn.query_string)
       |> to_string()
