@@ -5,10 +5,11 @@ defmodule Cegela.Server do
 
   use Plug.Router
 
-  plug Plug.RequestId
-  plug Plug.Logger
-  plug :match
-  plug :dispatch
+  plug(Plug.RequestId)
+  plug(Plug.Logger)
+  plug(Cegela.Static)
+  plug(:match)
+  plug(:dispatch)
 
   @doc "child spec to let us be supervised"
   def child_spec(opts) do
@@ -18,8 +19,11 @@ defmodule Cegela.Server do
         num -> Integer.parse(num) |> elem(0)
       end
 
-    Plug.Adapters.Cowboy.child_spec(scheme: :http, plug: __MODULE__,
-      options: Keyword.merge(opts, [port: port]))
+    Plug.Adapters.Cowboy.child_spec(
+      scheme: :http,
+      plug: __MODULE__,
+      options: Keyword.merge(opts, port: port)
+    )
   end
 
   get "/favicon.ico" do
