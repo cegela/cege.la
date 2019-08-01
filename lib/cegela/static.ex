@@ -16,9 +16,7 @@ defmodule Cegela.Static do
       |> Stream.map(fn line ->
         [id | [uri | _]] = String.split(line, ",")
 
-        Logger.debug(fn ->
-          "Mapping #{id} to #{uri}"
-        end)
+        Logger.debug("Mapping #{id} to #{uri}")
 
         {"/#{id}", uri}
       end)
@@ -36,7 +34,7 @@ defmodule Cegela.Static do
 
       {:ok, uri} ->
         conn
-        |> put_resp_header("Location", uri)
+        |> put_resp_header("location", uri)
         |> send_resp(302, "")
         |> halt()
     end

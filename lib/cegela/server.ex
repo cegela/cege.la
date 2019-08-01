@@ -13,11 +13,7 @@ defmodule Cegela.Server do
 
   @doc "child spec to let us be supervised"
   def child_spec(opts) do
-    port =
-      case System.get_env("PORT") do
-        nil -> 4000
-        num -> Integer.parse(num) |> elem(0)
-      end
+    port = Application.get_env(:cegela, __MODULE__)[:port]
 
     Plug.Adapters.Cowboy.child_spec(
       scheme: :http,
@@ -40,7 +36,7 @@ defmodule Cegela.Server do
       |> to_string()
 
     conn
-    |> put_resp_header("Location", uri)
+    |> put_resp_header("location", uri)
     |> send_resp(302, "")
   end
 end
