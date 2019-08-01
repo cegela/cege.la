@@ -19,8 +19,8 @@ defmodule CegelaTest do
 
   test "there is no favicon" do
     assert %Conn{status: 404} =
-      :get
-      |> conn("/favicon.ico")
-      |> Server.call(%{})
+             :get
+             |> conn("/favicon.ico")
+             |> Server.call(%{})
   end
 end
