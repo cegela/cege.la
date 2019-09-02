@@ -5,6 +5,8 @@ defmodule Cegela.Server do
 
   use Plug.Router
 
+  alias Plug.Adapters.Cowboy
+
   plug(Plug.RequestId)
   plug(Plug.Logger)
   plug(Cegela.Static)
@@ -15,7 +17,7 @@ defmodule Cegela.Server do
   def child_spec(opts) do
     port = Application.get_env(:cegela, __MODULE__)[:port]
 
-    Plug.Adapters.Cowboy.child_spec(
+    Cowboy.child_spec(
       scheme: :http,
       plug: __MODULE__,
       options: Keyword.merge(opts, port: port)
