@@ -8,6 +8,7 @@ defmodule Cegela.Mixfile do
       elixir: "~> 1.8",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
+      releases: releases(),
       test_coverage: [tool: ExCoveralls],
       preferred_cli_env: [coveralls: :test, "coveralls.detail": :test,
         "coveralls.post": :test, "coveralls.html": :test]
@@ -19,6 +20,15 @@ defmodule Cegela.Mixfile do
     [
       extra_applications: [:logger],
       mod: {Cegela.Application, []}
+    ]
+  end
+
+  defp releases do
+    [
+      cegela: [
+        include_executables_for: [:unix],
+        applications: [cegela: :permanent, runtime_tools: :permanent]
+      ]
     ]
   end
 
