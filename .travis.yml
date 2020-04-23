@@ -1,9 +1,10 @@
 language: elixir
-elixir: '1.9.2'
-otp_release: '22.0.3'
+elixir: '1.10.2'
+otp_release: '22.2.8'
 env:
   - MIX_ENV=test
 
 script:
   - mix coveralls
   - mix credo --strict
+  - mix format --check-formatted
