@@ -35,7 +35,7 @@ defmodule Cegela.Static do
       {:ok, uri} ->
         conn
         |> put_resp_header("location", uri)
-        |> send_resp(302, "")
+        |> send_resp(301, "")
         |> halt()
     end
   end
