@@ -13,8 +13,16 @@ defmodule CegelaTest do
       |> conn("/something?query=x")
       |> Server.call([])
 
-    assert 302 = conn.status
     assert ["https://bit.ly/something?query=x"] = get_resp_header(conn, "location")
+  end
+
+  test "redirects permanently" do
+    conn =
+      :get
+      |> conn("/something?query=x")
+      |> Server.call([])
+
+    assert 301 = conn.status
   end
 
   test "there is no favicon" do

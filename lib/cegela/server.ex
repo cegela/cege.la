@@ -39,6 +39,6 @@ defmodule Cegela.Server do
 
     conn
     |> put_resp_header("location", uri)
-    |> send_resp(302, "")
+    |> send_resp(301, "")
   end
 end
