@@ -31,12 +31,12 @@ jobs:
   deploy:
     needs: test
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/deploy-fix'
     steps:
       - uses: actions/checkout@v1
         with:
           ref: master
-      - uses: ilkka/git-https-push-action@master
+      - uses: rhruiz/git-https-push-action@master
         name: Deploy
         with:
           remoteUrl: ${{ secrets.PUSH_REMOTE }}
