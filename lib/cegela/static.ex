@@ -9,12 +9,13 @@ defmodule Cegela.Static do
 
   require Logger
 
+  @impl true
   def init(opts) do
     static_routes =
       "lib/static.csv"
       |> File.stream!()
       |> Stream.map(fn line ->
-        [id | [uri | _]] = String.split(line, ",")
+        [id, uri | _] = String.split(line, ",")
 
         Logger.debug("Mapping #{id} to #{uri}")
 
@@ -25,18 +26,16 @@ defmodule Cegela.Static do
     Keyword.put(opts, :static_routes, static_routes)
   end
 
-  def call(conn, opts) do
-    routes = Keyword.get(opts, :static_routes, %{})
-
-    case Map.fetch(routes, conn.request_path) do
-      :error ->
-        conn
-
-      {:ok, uri} ->
-        conn
-        |> put_resp_header("location", uri)
-        |> send_resp(301, "")
-        |> halt()
+  @impl true
+  def call(%Plug.Conn{} = conn, opts) do
+    with routes <- Keyword.get(opts, :static_routes, %{}),
+         {:ok, uri} <- Map.fetch(routes, conn.request_path) do
+      conn
+      |> put_resp_header("location", uri)
+      |> send_resp(301, "")
+      |> halt()
+    else
+      _ -> conn
     end
   end
 end

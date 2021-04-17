@@ -30,15 +30,15 @@ defmodule Cegela.Server do
 
   match _ do
     uri =
-      %URI{}
-      |> Map.put(:scheme, "https")
-      |> Map.put(:host, "bit.ly")
-      |> Map.put(:path, conn.request_path)
-      |> Map.put(:query, conn.query_string)
-      |> to_string()
+      struct(URI, %{
+        scheme: "https",
+        host: "bit.ly",
+        path: conn.request_path,
+        query: conn.query_string
+      })
 
     conn
-    |> put_resp_header("location", uri)
+    |> put_resp_header("location", to_string(uri))
     |> send_resp(301, "")
   end
 end
