@@ -4,11 +4,13 @@ defmodule Cegela.Server do
   """
 
   use Plug.Router
+  use Sentry.PlugCapture
 
   alias Plug.Adapters.Cowboy
 
   plug(Plug.RequestId)
   plug(Plug.Logger)
+  plug(Sentry.PlugContext)
   plug(Cegela.Static)
   plug(:match)
   plug(:dispatch)

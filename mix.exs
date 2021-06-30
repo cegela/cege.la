@@ -40,7 +40,9 @@ defmodule Cegela.Mixfile do
   defp deps do
     [
       {:plug, "~> 1.8"},
-      {:plug_cowboy, "~> 2.0"},
+      {:plug_cowboy, "~> 2.3"},
+      {:sentry, "~> 8.0"},
+      {:jason, "~> 1.1"},
       {:excoveralls, "~> 0.7", only: :test},
       {:credo, "~> 1.0", only: [:dev, :test], runtime: false}
     ]
