@@ -22,7 +22,7 @@ defmodule Cegela.Mixfile do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger],
+      extra_applications: [:logger, :hackney],
       mod: {Cegela.Application, []}
     ]
   end
@@ -43,6 +43,7 @@ defmodule Cegela.Mixfile do
       {:plug_cowboy, "~> 2.3"},
       {:sentry, "~> 8.0"},
       {:jason, "~> 1.1"},
+      {:hackney, "~> 1.8"},
       {:excoveralls, "~> 0.7", only: :test},
       {:credo, "~> 1.0", only: [:dev, :test], runtime: false}
     ]
