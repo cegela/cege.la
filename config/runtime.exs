@@ -4,7 +4,7 @@ config :cegela, Cegela.Server, port: System.get_env("PORT", "4000") |> String.to
 
 config :sentry,
   dsn: System.get_env("SENTRY_DSN"),
-  environment_name: :prod,
+  environment_name: config_env(),
   enable_source_code_context: true,
   root_source_code_path: File.cwd!(),
   tags: %{
