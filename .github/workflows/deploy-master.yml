@@ -10,14 +10,14 @@ jobs:
     env:
       MIX_ENV: test
 
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
 
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-elixir@v1
+      - uses: erlef/setup-beam@v1
         with:
-          otp-version: '24.0.2'
-          elixir-version: '1.12.1'
+          otp-version: '24.1.2'
+          elixir-version: '1.12.3'
 
       - uses: actions/cache@v2
         id: mix-cache
@@ -32,12 +32,12 @@ jobs:
       - run: mix format --check-formatted
 
   sarif:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-elixir@v1
+      - uses: erlef/setup-beam@v1
         with:
-          otp-version: '24.0.2'
+          otp-version: '24.1.2'
           elixir-version: '1.12.1'
 
       - uses: actions/cache@v2
