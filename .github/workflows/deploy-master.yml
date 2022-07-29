@@ -28,6 +28,7 @@ jobs:
             ${{ runner.os }}-mix-
 
       - run: mix deps.get
+      - run: mix compile --all-warnings --warning-as-errors
       - run: mix coveralls
 
   quality:
@@ -49,8 +50,13 @@ jobs:
             ${{ runner.os }}-mix-
 
       - run: mix deps.get
-      - run: mix credo --strict
+      - run: mix hex.audit
+      - run: mix deps.unlock --check-unused
+      - run: mix deps.audit
       - run: mix format --check-formatted
+      - run: mix compile --all-warnings --warning-as-errors
+      - run: mix sobelow
+      - run: mix credo --strict
 
   sarif:
     runs-on: ubuntu-20.04
