@@ -46,7 +46,7 @@ defmodule Cegela.Mixfile do
       {:hackney, "~> 1.8"},
       {:excoveralls, "~> 0.7", only: :test},
       {:sobelow, "~> 0.8", only: :dev},
-      {:mix_audit, "~> 1.0", only: [:dev, :test], runtime: false},
+      {:mix_audit, "~> 2.0", only: [:dev, :test], runtime: false},
       {:credo, "~> 1.0", only: [:dev, :test], runtime: false},
       {:mix_machine, "~> 0.1", only: [:dev]}
     ]
