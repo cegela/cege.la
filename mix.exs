@@ -40,7 +40,7 @@ defmodule Cegela.Mixfile do
   defp deps do
     [
       {:plug, "~> 1.8"},
-      {:plug_cowboy, "~> 2.3"},
+      {:bandit, ">= 0.5.8"},
       {:sentry, "~> 8.0"},
       {:jason, "~> 1.1"},
       {:hackney, "~> 1.8"},
