@@ -1,36 +1,28 @@
 defmodule CegelaTest do
   use ExUnit.Case, async: true
-  use Plug.Test
 
   alias Cegela.Server
-  alias Plug.Conn
 
   doctest Cegela
 
+  def get!(url) do
+    Req.get!("http://#{url}", plug: Server, follow_redirects: false)
+  end
+
   describe inspect(&Server.call/2) do
     test "redirects to bit.ly" do
-      conn =
-        :get
-        |> conn("/something?query=x")
-        |> Server.call([])
-
-      assert ["https://bit.ly/something?query=x"] = get_resp_header(conn, "location")
+      assert {"location", "https://bit.ly/something?query=x"} =
+               get!("/something?query=x")
+               |> Map.get(:headers)
+               |> List.keyfind("location", 0)
     end
 
     test "redirects permanently" do
-      conn =
-        :get
-        |> conn("/something?query=x")
-        |> Server.call([])
-
-      assert 301 = conn.status
+      assert get!("/something?query=x").status == 301
     end
 
     test "there is no favicon" do
-      assert %Conn{status: 404} =
-               :get
-               |> conn("/favicon.ico")
-               |> Server.call(%{})
+      assert get!("/favicon.ico").status == 404
     end
   end
 end
