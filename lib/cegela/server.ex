@@ -16,8 +16,9 @@ defmodule Cegela.Server do
   @doc "child spec to let us be supervised"
   def child_spec(opts) do
     port = Application.get_env(:cegela, __MODULE__)[:port]
+    opts = Keyword.merge([scheme: :http, plug: __MODULE__, port: port], opts)
 
-    Bandit.child_spec(scheme: :http, plug: __MODULE__, options: Keyword.merge(opts, port: port))
+    Bandit.child_spec(opts)
   end
 
   get "/favicon.ico" do
