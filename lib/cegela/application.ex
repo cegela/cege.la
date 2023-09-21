@@ -4,6 +4,8 @@ defmodule Cegela.Application do
   use Application
 
   def start(_type, _args) do
+    Logger.add_handlers(:cegela)
+
     children = [
       Cegela.Server
     ]
