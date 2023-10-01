@@ -2,7 +2,14 @@
 # and its dependencies with the aid of the Mix.Config module.
 import Config
 
-config :logger, :console, metadata: [:request_id], backends: [:console, Sentry.LoggerBackend]
+config :logger, :console, metadata: [:request_id], backends: [:console]
+
+config :cegela, :logger, [
+  {:handler, :sentry_handler, Sentry.LoggerHandler,
+   %{
+     config: %{metadata: [:file, :line, :request_id]}
+   }}
+]
 
 # This configuration is loaded before any dependency and is restricted
 # to this project. If another project depends on this project, this
