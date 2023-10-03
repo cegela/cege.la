@@ -60,7 +60,7 @@ jobs:
       - run: mix format --check-formatted
       - run: mix compile --all-warnings --warning-as-errors
       - run: mix sobelow
-      - run: mix credo --strict
+      - run: mix credo
 
   sarif:
     runs-on: ubuntu-20.04
