@@ -1,8 +1,8 @@
 name: Build and Deploy
 
 env:
-  BUILD_OTP_VERSION: '26.2.1'
-  BUILD_ELIXIR_VERSION: '1.16.0'
+  BUILD_OTP_VERSION: '27.0.0'
+  BUILD_ELIXIR_VERSION: '1.17.0'
 
 
 on:
