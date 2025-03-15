@@ -99,6 +99,7 @@ jobs:
         with:
           remoteUrl: ${{ secrets.PUSH_REMOTE }}
           skipHooks: false
+          force: true
 
       - run: "curl -o /dev/null -D - -sf https://cege.la/ | grep -q 'location: https://bit.ly'"
         name: verify deploy
