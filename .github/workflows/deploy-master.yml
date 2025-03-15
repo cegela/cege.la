@@ -94,6 +94,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: master
+          fetch-depth: 0
       - uses: rhruiz/git-https-push-action@master
         name: Deploy
         with:
