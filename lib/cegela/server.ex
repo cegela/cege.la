@@ -26,16 +26,10 @@ defmodule Cegela.Server do
   end
 
   match _ do
-    uri =
-      struct(URI, %{
-        scheme: "https",
-        host: "bit.ly",
-        path: conn.request_path,
-        query: conn.query_string
-      })
+    url = URI.merge("https://bit.ly", "#{conn.request_path}?#{conn.query_string}")
 
     conn
-    |> put_resp_header("location", to_string(uri))
-    |> send_resp(301, "")
+    |> put_resp_header("location", to_string(url))
+    |> send_resp(301, "Moved to #{url}")
   end
 end
