@@ -82,7 +82,7 @@ jobs:
 
       - run: mix deps.get
       - run: mix compile.machine --format sarif --output sarif.json
-      - uses: github/codeql-action/upload-sarif@v1
+      - uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: sarif.json
 
