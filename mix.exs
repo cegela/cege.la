@@ -9,13 +9,7 @@ defmodule Cegela.Mixfile do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       releases: releases(),
-      test_coverage: [tool: ExCoveralls],
-      preferred_cli_env: [
-        coveralls: :test,
-        "coveralls.detail": :test,
-        "coveralls.post": :test,
-        "coveralls.html": :test
-      ]
+      test_coverage: [tool: ExCoveralls]
     ]
   end
 
@@ -24,6 +18,17 @@ defmodule Cegela.Mixfile do
     [
       extra_applications: [:logger, :hackney],
       mod: {Cegela.Application, []}
+    ]
+  end
+
+  def cli do
+    [
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
+      ]
     ]
   end
 
