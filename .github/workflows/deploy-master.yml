@@ -2,7 +2,7 @@ name: Build and Deploy
 
 env:
   BUILD_OTP_VERSION: '28.1.1'
-  BUILD_ELIXIR_VERSION: '1.19.2'
+  BUILD_ELIXIR_VERSION: '1.19.3'
 
 on:
   push:
