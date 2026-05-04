@@ -7,6 +7,7 @@ config :sentry,
   environment_name: config_env(),
   enable_source_code_context: true,
   root_source_code_path: File.cwd!(),
+  enable_logs: true,
   logs: [
     level: :info,
     excluded_domains: [],
