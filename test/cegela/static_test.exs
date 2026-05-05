@@ -1,5 +1,5 @@
 defmodule Cegela.StaticTest do
-  use ExUnit.Case, async: true
+  use ExUnit.Case, async: false
 
   import ExUnit.CaptureLog
   import Plug.Test
