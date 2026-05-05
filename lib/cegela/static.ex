@@ -41,6 +41,6 @@ defmodule Cegela.Static do
   end
 
   defp log(%Plug.Conn{} = conn) do
-    Logger.info("Static request to " <> conn.request_path)
+    Logger.info(%{static: conn.request_path})
   end
 end

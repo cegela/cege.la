@@ -46,7 +46,7 @@ defmodule Cegela.StaticTest do
           |> Static.call(static_routes: %{"/krakem" => url})
         end)
 
-      assert log =~ "Static request to /krakem"
+      assert log =~ ~S(static: "/krakem")
     end
 
     test "does nothing to something that does not match a static" do
