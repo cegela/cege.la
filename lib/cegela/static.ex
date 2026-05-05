@@ -34,8 +34,13 @@ defmodule Cegela.Static do
       |> put_resp_header("location", uri)
       |> send_resp(301, "")
       |> halt()
+      |> tap(&log/1)
     else
       _ -> conn
     end
+  end
+
+  defp log(%Plug.Conn{} = conn) do
+    Logger.info("Static request to " <> conn.request_path)
   end
 end

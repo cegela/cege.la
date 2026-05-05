@@ -1,6 +1,7 @@
 defmodule Cegela.StaticTest do
   use ExUnit.Case, async: true
 
+  import ExUnit.CaptureLog
   import Plug.Test
   import Plug.Conn
 
@@ -35,10 +36,34 @@ defmodule Cegela.StaticTest do
       assert [static_routes: %{"/KrAKm" => ^url}] = Static.init([])
     end
 
+    test "logs a successful static redirect" do
+      url = "http://lmgtfy.com/?q=ultima+vers%C3%A3o+do+ubuntu"
+
+      log =
+        capture_log([level: :info], fn ->
+          :get
+          |> conn("/krakem")
+          |> Static.call(static_routes: %{"/krakem" => url})
+        end)
+
+      assert log =~ "Static request to /krakem"
+    end
+
     test "does nothing to something that does not match a static" do
       conn = conn(:get, "/krakem")
 
       assert ^conn = Static.call(conn, static_routes: %{})
+    end
+
+    test "does not log a non-match" do
+      log =
+        capture_log(fn ->
+          :get
+          |> conn("/krakem")
+          |> Static.call(static_routes: %{})
+        end)
+
+      assert "" == log
     end
   end
 end
