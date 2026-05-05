@@ -7,7 +7,7 @@ defmodule Cegela.Server do
   use Sentry.PlugCapture
 
   plug(Plug.RequestId)
-  plug(Plug.Logger)
+  plug(Plug.Logger, log: :debug)
   plug(Sentry.PlugContext)
   plug(Cegela.Static)
   plug(:match)
