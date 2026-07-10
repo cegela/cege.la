@@ -41,6 +41,13 @@ defmodule Cegela.Static do
   end
 
   defp log(%Plug.Conn{} = conn) do
-    Logger.info(%{static: conn.request_path})
+    ua = conn.req_headers |> Enum.filter(&match?({"user-agent", _}, &1)) |> Enum.map(&elem(&1, 1))
+    ref = conn.req_headers |> Enum.filter(&match?({"referer", _}, &1)) |> Enum.map(&elem(&1, 1))
+
+    Logger.info(%{
+      static: conn.request_path,
+      ua: ua,
+      ref: ref
+    })
   end
 end

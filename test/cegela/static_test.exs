@@ -43,10 +43,14 @@ defmodule Cegela.StaticTest do
         capture_log([level: :info], fn ->
           :get
           |> conn("/krakem")
+          |> put_req_header("user-agent", "unit-test")
+          |> put_req_header("referer", "http://example.org/")
           |> Static.call(static_routes: %{"/krakem" => url})
         end)
 
       assert log =~ ~S(static: "/krakem")
+      assert log =~ ~S(ua: ["unit-test"])
+      assert log =~ ~S(ref: ["http://example.org/"])
     end
 
     test "does nothing to something that does not match a static" do
