@@ -44,7 +44,11 @@ defmodule Cegela.Static do
     ua = conn.req_headers |> Enum.filter(&match?({"user-agent", _}, &1)) |> Enum.map(&elem(&1, 1))
     ref = conn.req_headers |> Enum.filter(&match?({"referer", _}, &1)) |> Enum.map(&elem(&1, 1))
     remote_ip = conn.remote_ip |> Tuple.to_list()
-    x_forwarded_for = conn.req_headers |>  Enum.filter(&match?({"x-forwarded-for", _}, &1)) |> Enum.map(&elem(&1, 1))
+
+    x_forwarded_for =
+      conn.req_headers
+      |> Enum.filter(&match?({"x-forwarded-for", _}, &1))
+      |> Enum.map(&elem(&1, 1))
 
     Logger.info(%{
       static: conn.request_path,
