@@ -48,7 +48,7 @@ defmodule Cegela.Mixfile do
       {:bandit, ">= 0.5.8"},
       {:sentry, "~> 14.0"},
       {:jason, "~> 1.1"},
-      {:finch, "~> 0.24.0"},
+      {:finch, "~> 0.25.0"},
       {:hackney, "~> 4.0"},
       {:excoveralls, "~> 0.7", only: :test},
       {:sobelow, "~> 0.8", only: :dev},
